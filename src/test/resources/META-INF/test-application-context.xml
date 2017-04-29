@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<!-- PERSISTENCE CONFIGURATION -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+        proxy-target-class="true" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc:hsqldb:mem:embeddedDataSource" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+
+	<jdbc:embedded-database id="embeddedDataSource" type="HSQL">
+		<jdbc:script location="classpath:sql/create-db.sql" />
+		<jdbc:script location="classpath:sql/insert-data.sql" />
+	</jdbc:embedded-database>
+
+	<bean id="pum"
+		class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath:META-INF/test-persistence.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="hibernateJpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+		<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"/>
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitManager" ref="pum"></property>
+		<property name="persistenceUnitName" value="test-persistent-unit"></property>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"></property>
+		<property name="loadTimeWeaver">
+			<bean
+				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+		</property>
+	</bean>
+
+	<!-- Test App Configuration -->
+	<bean id="productDAO" class="it.diepet.spring.tx.eventdispatcher.test.dao.ProductDAO" />
+	<bean id="productService"
+		class="it.diepet.spring.tx.eventdispatcher.test.service.ProductServiceImpl" />
+	<bean id="warehouseService"
+		class="it.diepet.spring.tx.eventdispatcher.test.service.WarehouseServiceImpl" />
+	
+	<!-- TX Configuration -->		
+	<bean id="transactionManager" class="it.diepet.spring.tx.eventdispatcher.EventDispatcherJpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	
+	<bean id="testBeginTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestBeginTransactionEventListener" />
+	<bean id="testCommitTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestCommitTransactionEventListener" />
+	<bean id="testResumeTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestResumeTransactionEventListener" />
+	<bean id="testRollbackTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestRollbackTransactionEventListener" />
+	<bean id="testSetRollbackOnlyTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSetRollbackOnlyTransactionEventListener" />
+	<bean id="testSuspendTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSuspendTransactionEventListener" />
+	
+	<bean id="testBeginTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestBeginTransactionErrorEventListener" />
+	<bean id="testCommitTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestCommitTransactionErrorEventListener" />
+	<bean id="testResumeTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestResumeTransactionErrorEventListener" />
+	<bean id="testRollbackTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestRollbackTransactionErrorEventListener" />
+	<bean id="testSetRollbackOnlyTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSetRollbackOnlyTransactionErrorEventListener" />
+	<bean id="testSuspendTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSuspendTransactionErrorEventListener" />
+
+</beans>
