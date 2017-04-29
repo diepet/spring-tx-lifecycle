@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.diepet.spring.tx.eventdispatcher.test.dao.ProductDAO;
 import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationException;
+import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationRuntimeException;
 import it.diepet.spring.tx.eventdispatcher.test.model.Product;
 import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
 
@@ -42,10 +43,26 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
+	public void successfullOperation() {
+		LOGGER.debug("[START] successfullOperation()");
+		StringCollector.add("productService.successfullOperation()");
+		LOGGER.debug("[END] successfullOperation()");
+	}
+
+	@Override
+	@Transactional
 	public void launchCheckedException() throws ApplicationException {
 		LOGGER.debug("[START] launchCheckedException()");
 		StringCollector.add("productService.launchCheckedException()");
 		throw new ApplicationException();
+	}
+
+	@Override
+	@Transactional
+	public void launchUncheckedException() throws ApplicationRuntimeException {
+		LOGGER.debug("[START] launchUncheckedException()");
+		StringCollector.add("productService.launchUncheckedException()");
+		throw new ApplicationRuntimeException();
 	}
 
 	@Override
@@ -63,6 +80,19 @@ public class ProductServiceImpl implements ProductService {
 		StringCollector.add("productService.checkWarehouse()");
 		warehouseService.suspendCurrentTransaction();
 		LOGGER.debug("[END] checkWarehouse()");
+	}
+
+	@Override
+	@Transactional
+	public void callFailingWarehouseMethod() {
+		LOGGER.debug("[START] callFailingWarehouseMethod()");
+		StringCollector.add("productService.callFailingWarehouseMethod()");
+		try {
+			warehouseService.launchCheckedExceptionForRollback();
+		} catch (ApplicationException e) {
+
+		}
+		LOGGER.debug("[END] callFailingWarehouseMethod()");
 	}
 
 }

@@ -39,7 +39,7 @@ public class CommitTransactionInfo implements TransactionInfo {
 	public String toString() {
 		final StringBuilder buffer = new StringBuilder();
 		buffer.append("[status=");
-		buffer.append(this.status);
+		buffer.append(this.getStatus());
 		buffer.append("]");
 		return buffer.toString();
 	}

@@ -52,9 +52,9 @@ public class ResumeTransactionInfo implements TransactionInfo {
 	public String toString() {
 		final StringBuilder buffer = new StringBuilder();
 		buffer.append("[transaction=");
-		buffer.append(this.transaction);
+		buffer.append(this.getTransaction());
 		buffer.append(", suspendedResources=");
-		buffer.append(this.suspendedResources);
+		buffer.append(this.getSuspendedResources());
 		buffer.append("]");
 		return buffer.toString();
 	}

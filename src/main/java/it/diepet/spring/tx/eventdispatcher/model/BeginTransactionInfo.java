@@ -54,9 +54,9 @@ public class BeginTransactionInfo implements TransactionInfo {
 	public String toString() {
 		final StringBuilder buffer = new StringBuilder();
 		buffer.append("[transaction=");
-		buffer.append(this.transaction);
+		buffer.append(this.getTransaction());
 		buffer.append(", definition=");
-		buffer.append(this.definition);
+		buffer.append(this.getDefinition());
 		buffer.append("]");
 		return buffer.toString();
 	}

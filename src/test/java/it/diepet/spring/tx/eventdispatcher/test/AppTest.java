@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationException;
+import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationRuntimeException;
 import it.diepet.spring.tx.eventdispatcher.test.model.Product;
 import it.diepet.spring.tx.eventdispatcher.test.service.ProductService;
 import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
@@ -46,6 +47,19 @@ public class AppTest {
 	}
 
 	@Test
+	public void testSuccessfulOperation() {
+		productService.successfullOperation();
+		List<String> stringList = StringCollector.getList();
+		Assert.assertNotNull(stringList);
+		Assert.assertEquals(3, stringList.size());
+		Assert.assertTrue(
+				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertEquals("productService.successfullOperation()", stringList.get(1));
+		Assert.assertTrue(
+				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+	}
+
+	@Test
 	public void testLaunchCheckedException() {
 		try {
 			productService.launchCheckedException();
@@ -58,6 +72,24 @@ public class AppTest {
 			Assert.assertEquals("productService.launchCheckedException()", stringList.get(1));
 			Assert.assertTrue(
 					stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+			return;
+		}
+		Assert.fail();
+	}
+
+	@Test
+	public void testLaunchUncheckedException() {
+		try {
+			productService.launchUncheckedException();
+		} catch (ApplicationRuntimeException e) {
+			List<String> stringList = StringCollector.getList();
+			Assert.assertNotNull(stringList);
+			Assert.assertEquals(3, stringList.size());
+			Assert.assertTrue(
+					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertEquals("productService.launchUncheckedException()", stringList.get(1));
+			Assert.assertTrue(
+					stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent"));
 			return;
 		}
 		Assert.fail();
@@ -97,5 +129,25 @@ public class AppTest {
 				stringList.get(4).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent"));
 		Assert.assertTrue(
 				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+	}
+
+	@Test
+	public void testFailureInheritedTransaction() {
+		try {
+			productService.callFailingWarehouseMethod();
+		} catch (RuntimeException e) {
+			List<String> stringList = StringCollector.getList();
+			Assert.assertNotNull(stringList);
+			Assert.assertEquals(5, stringList.size());
+			Assert.assertTrue(
+					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertEquals("productService.callFailingWarehouseMethod()", stringList.get(1));
+			Assert.assertEquals("warehouseService.launchCheckedExceptionForRollback()", stringList.get(2));
+			Assert.assertTrue(stringList.get(3)
+					.startsWith("it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent"));
+			Assert.assertTrue(stringList.get(4)
+					.startsWith("it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent"));
+		}
+
 	}
 }
