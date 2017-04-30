@@ -22,5 +22,23 @@ The transaction managers supported are:
 * org.springframework.orm.jpa.JpaTransactionManager
 * org.springframework.transaction.jta.JtaTransactionManager
 
+For example this configuration:
+
+```
+	<!-- TX Configuration -->		
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+```
+
+must be replaced by
+
+
+```
+	<!-- TX Configuration -->		
+	<bean id="transactionManager" class="it.diepet.spring.tx.eventdispatcher.EventDispatcherJpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+```
 
 
