@@ -6,7 +6,7 @@
 	<persistence-unit name="test-persistent-unit"
 		transaction-type="RESOURCE_LOCAL">
 		<validation-mode>NONE</validation-mode>
-		<class>it.diepet.spring.tx.eventdispatcher.test.model.Product</class>
+		<class>it.diepet.spring.tx.eventdispatcher.test.app.model.Product</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:embeddedDataSource" />
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />

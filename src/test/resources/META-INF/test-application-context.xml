@@ -53,29 +53,29 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
 	</bean>
 
 	<!-- Test App Configuration -->
-	<bean id="productDAO" class="it.diepet.spring.tx.eventdispatcher.test.dao.ProductDAO" />
+	<bean id="productDAO" class="it.diepet.spring.tx.eventdispatcher.test.app.dao.ProductDAO" />
 	<bean id="productService"
-		class="it.diepet.spring.tx.eventdispatcher.test.service.ProductServiceImpl" />
+		class="it.diepet.spring.tx.eventdispatcher.test.app.service.ProductServiceImpl" />
 	<bean id="warehouseService"
-		class="it.diepet.spring.tx.eventdispatcher.test.service.WarehouseServiceImpl" />
+		class="it.diepet.spring.tx.eventdispatcher.test.app.service.WarehouseServiceImpl" />
 	
 	<!-- TX Configuration -->		
 	<bean id="transactionManager" class="it.diepet.spring.tx.eventdispatcher.EventDispatcherJpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	
-	<bean id="testBeginTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestBeginTransactionEventListener" />
-	<bean id="testCommitTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestCommitTransactionEventListener" />
-	<bean id="testResumeTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestResumeTransactionEventListener" />
-	<bean id="testRollbackTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestRollbackTransactionEventListener" />
-	<bean id="testSetRollbackOnlyTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSetRollbackOnlyTransactionEventListener" />
-	<bean id="testSuspendTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSuspendTransactionEventListener" />
+	<bean id="testBeginTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestBeginTransactionEventListener" />
+	<bean id="testCommitTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitTransactionEventListener" />
+	<bean id="testResumeTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestResumeTransactionEventListener" />
+	<bean id="testRollbackTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestRollbackTransactionEventListener" />
+	<bean id="testSetRollbackOnlyTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyTransactionEventListener" />
+	<bean id="testSuspendTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendTransactionEventListener" />
 	
-	<bean id="testBeginTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestBeginTransactionErrorEventListener" />
-	<bean id="testCommitTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestCommitTransactionErrorEventListener" />
-	<bean id="testResumeTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestResumeTransactionErrorEventListener" />
-	<bean id="testRollbackTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestRollbackTransactionErrorEventListener" />
-	<bean id="testSetRollbackOnlyTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSetRollbackOnlyTransactionErrorEventListener" />
-	<bean id="testSuspendTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.listener.TestSuspendTransactionErrorEventListener" />
+	<bean id="testBeginTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestBeginTransactionErrorEventListener" />
+	<bean id="testCommitTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitTransactionErrorEventListener" />
+	<bean id="testResumeTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestResumeTransactionErrorEventListener" />
+	<bean id="testRollbackTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestRollbackTransactionErrorEventListener" />
+	<bean id="testSetRollbackOnlyTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyTransactionErrorEventListener" />
+	<bean id="testSuspendTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendTransactionErrorEventListener" />
 
 </beans>
