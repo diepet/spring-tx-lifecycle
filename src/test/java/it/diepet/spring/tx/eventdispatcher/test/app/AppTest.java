@@ -29,21 +29,30 @@ public class AppTest {
 	}
 
 	@Test
-	public void testAddProduct() {
+	public void testPersistence() {
 		Product product = new Product();
 		product.setId(9L);
 		product.setCode("99999");
 		product.setDescription("Apple");
 		productService.add(product);
+		List<Product> productList = productService.findAll();
+
+		Assert.assertNotNull(productList);
+		Assert.assertEquals(4, productList.size());
 
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
-		Assert.assertEquals(3, stringList.size());
+		Assert.assertEquals(6, stringList.size());
 		Assert.assertTrue(
 				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
 		Assert.assertEquals("productService.add()", stringList.get(1));
 		Assert.assertTrue(
 				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(
+				stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertEquals("productService.findAll()", stringList.get(4));
+		Assert.assertTrue(
+				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
 	}
 
 	@Test
@@ -114,7 +123,7 @@ public class AppTest {
 	}
 
 	@Test
-	public void testCheckWarehouse() {
+	public void testSuspendTransaction() {
 		productService.checkWarehouse();
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);

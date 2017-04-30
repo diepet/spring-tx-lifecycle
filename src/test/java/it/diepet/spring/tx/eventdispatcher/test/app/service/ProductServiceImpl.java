@@ -36,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	public List<Product> findAll() {
 		LOGGER.debug("[START] findAll()");
+		StringCollector.add("productService.findAll()");
 		List<Product> result = productDAO.findAll();
 		LOGGER.debug("[END] findAll()");
 		return result;

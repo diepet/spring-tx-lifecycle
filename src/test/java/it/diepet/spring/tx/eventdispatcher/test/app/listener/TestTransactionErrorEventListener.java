@@ -14,7 +14,7 @@ public abstract class TestTransactionErrorEventListener<T extends TransactionErr
 
 	@Override
 	public void onApplicationEvent(T event) {
-		String msg = event.getClass().getName() + ": " + event.getTransactionInfo();
+		String msg = event.getClass().getName() + ": " + event.getTransactionInfo() + " - " + event.getError();
 		LOGGER.info(msg);
 		StringCollector.add(msg);
 	}

@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
-
 public abstract class AbstractJpaDAO<T extends Serializable> {
 
 	private Class<T> clazz;
@@ -25,7 +23,6 @@ public abstract class AbstractJpaDAO<T extends Serializable> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		StringCollector.add("findAll");
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 

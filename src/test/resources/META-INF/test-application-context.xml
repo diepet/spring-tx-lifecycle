@@ -71,11 +71,6 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
 	<bean id="testSetRollbackOnlyTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyTransactionEventListener" />
 	<bean id="testSuspendTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendTransactionEventListener" />
 	
-	<bean id="testBeginTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestBeginTransactionErrorEventListener" />
 	<bean id="testCommitTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitTransactionErrorEventListener" />
-	<bean id="testResumeTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestResumeTransactionErrorEventListener" />
-	<bean id="testRollbackTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestRollbackTransactionErrorEventListener" />
-	<bean id="testSetRollbackOnlyTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyTransactionErrorEventListener" />
-	<bean id="testSuspendTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendTransactionErrorEventListener" />
 
 </beans>
