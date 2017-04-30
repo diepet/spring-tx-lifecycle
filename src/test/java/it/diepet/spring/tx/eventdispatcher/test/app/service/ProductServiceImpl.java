@@ -1,4 +1,4 @@
-package it.diepet.spring.tx.eventdispatcher.test.service;
+package it.diepet.spring.tx.eventdispatcher.test.app.service;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.diepet.spring.tx.eventdispatcher.test.dao.ProductDAO;
-import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationException;
-import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationRuntimeException;
-import it.diepet.spring.tx.eventdispatcher.test.model.Product;
+import it.diepet.spring.tx.eventdispatcher.test.app.dao.ProductDAO;
+import it.diepet.spring.tx.eventdispatcher.test.app.error.ApplicationException;
+import it.diepet.spring.tx.eventdispatcher.test.app.error.ApplicationRuntimeException;
+import it.diepet.spring.tx.eventdispatcher.test.app.model.Product;
 import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
 
 public class ProductServiceImpl implements ProductService {

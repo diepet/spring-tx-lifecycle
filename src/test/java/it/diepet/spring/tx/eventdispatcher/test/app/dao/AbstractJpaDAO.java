@@ -1,4 +1,4 @@
-package it.diepet.spring.tx.eventdispatcher.test.dao;
+package it.diepet.spring.tx.eventdispatcher.test.app.dao;
 
 import java.io.Serializable;
 import java.util.List;

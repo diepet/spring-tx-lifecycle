@@ -1,6 +1,6 @@
-package it.diepet.spring.tx.eventdispatcher.test.service;
+package it.diepet.spring.tx.eventdispatcher.test.app.service;
 
-import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationException;
+import it.diepet.spring.tx.eventdispatcher.test.app.error.ApplicationException;
 
 public interface WarehouseService {
 

@@ -1,4 +1,4 @@
-package it.diepet.spring.tx.eventdispatcher.test.error;
+package it.diepet.spring.tx.eventdispatcher.test.app.error;
 
 @SuppressWarnings("serial")
 public class ApplicationException extends Exception {

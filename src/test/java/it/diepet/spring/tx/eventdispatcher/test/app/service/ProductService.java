@@ -1,10 +1,10 @@
-package it.diepet.spring.tx.eventdispatcher.test.service;
+package it.diepet.spring.tx.eventdispatcher.test.app.service;
 
 import java.util.List;
 
-import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationException;
-import it.diepet.spring.tx.eventdispatcher.test.error.ApplicationRuntimeException;
-import it.diepet.spring.tx.eventdispatcher.test.model.Product;
+import it.diepet.spring.tx.eventdispatcher.test.app.error.ApplicationException;
+import it.diepet.spring.tx.eventdispatcher.test.app.error.ApplicationRuntimeException;
+import it.diepet.spring.tx.eventdispatcher.test.app.model.Product;
 
 public interface ProductService {
 

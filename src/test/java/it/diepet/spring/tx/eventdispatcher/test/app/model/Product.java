@@ -1,4 +1,4 @@
-package it.diepet.spring.tx.eventdispatcher.test.model;
+package it.diepet.spring.tx.eventdispatcher.test.app.model;
 
 import java.io.Serializable;
 
