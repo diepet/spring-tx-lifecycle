@@ -124,13 +124,13 @@ public class AppTest {
 
 	@Test
 	public void testSuspendTransaction() {
-		productService.checkWarehouse();
+		productService.callSuspendingTransactionWarehouseMethod();
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
 		Assert.assertEquals(6, stringList.size());
 		Assert.assertTrue(
 				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
-		Assert.assertEquals("productService.checkWarehouse()", stringList.get(1));
+		Assert.assertEquals("productService.callSuspendingTransactionWarehouseMethod()", stringList.get(1));
 		Assert.assertTrue(
 				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent"));
 		Assert.assertEquals("warehouseService.suspendCurrentTransaction()", stringList.get(3));
@@ -158,5 +158,27 @@ public class AppTest {
 					.startsWith("it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent"));
 		}
 
+	}
+
+	@Test
+	public void testRequiresNewTransaction() {
+		productService.callRequiresNewWarehouseMethod();
+		List<String> stringList = StringCollector.getList();
+		Assert.assertNotNull(stringList);
+		Assert.assertEquals(8, stringList.size());
+		Assert.assertTrue(
+				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertEquals("productService.callRequiresNewWarehouseMethod()", stringList.get(1));
+		Assert.assertTrue(
+				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent"));
+		Assert.assertTrue(
+				stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertEquals("warehouseService.executeRequiresNewTransaction()", stringList.get(4));
+		Assert.assertTrue(
+				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(
+				stringList.get(6).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent"));
+		Assert.assertTrue(
+				stringList.get(7).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
 	}
 }

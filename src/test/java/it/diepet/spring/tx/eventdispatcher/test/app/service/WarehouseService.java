@@ -8,4 +8,6 @@ public interface WarehouseService {
 
 	public void launchCheckedExceptionForRollback() throws ApplicationException;
 
+	public void executeRequiresNewTransaction();
+
 }

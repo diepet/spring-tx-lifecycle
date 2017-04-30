@@ -24,7 +24,7 @@ The transaction managers supported are:
 
 For example this configuration:
 
-```
+```xml
 	<!-- TX Configuration -->		
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
@@ -34,7 +34,7 @@ For example this configuration:
 must be replaced by
 
 
-```
+```xml
 	<!-- TX Configuration -->		
 	<bean id="transactionManager" class="it.diepet.spring.tx.eventdispatcher.EventDispatcherJpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>

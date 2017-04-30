@@ -76,11 +76,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
-	public void checkWarehouse() {
-		LOGGER.debug("[START] checkWarehouse()");
-		StringCollector.add("productService.checkWarehouse()");
+	public void callSuspendingTransactionWarehouseMethod() {
+		LOGGER.debug("[START] callSuspendingTransactionWarehouseMethod()");
+		StringCollector.add("productService.callSuspendingTransactionWarehouseMethod()");
 		warehouseService.suspendCurrentTransaction();
-		LOGGER.debug("[END] checkWarehouse()");
+		LOGGER.debug("[END] callSuspendingTransactionWarehouseMethod()");
 	}
 
 	@Override
@@ -94,6 +94,15 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 		LOGGER.debug("[END] callFailingWarehouseMethod()");
+	}
+
+	@Override
+	@Transactional
+	public void callRequiresNewWarehouseMethod() {
+		LOGGER.debug("[START] callRequiresNewWarehouseMethod()");
+		StringCollector.add("productService.callRequiresNewWarehouseMethod()");
+		warehouseService.executeRequiresNewTransaction();
+		LOGGER.debug("[END] callRequiresNewWarehouseMethod()");
 	}
 
 }

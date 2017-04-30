@@ -20,8 +20,10 @@ public interface ProductService {
 
 	void launchUncheckedException() throws ApplicationRuntimeException;
 
-	void checkWarehouse();
+	void callSuspendingTransactionWarehouseMethod();
 
 	void callFailingWarehouseMethod();
+
+	void callRequiresNewWarehouseMethod();
 
 }

@@ -28,4 +28,12 @@ public class WarehouseServiceImpl implements WarehouseService {
 		throw new ApplicationException();
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void executeRequiresNewTransaction() {
+		LOGGER.debug("[START] executeRequiresNewTransaction()");
+		StringCollector.add("warehouseService.executeRequiresNewTransaction()");
+		LOGGER.debug("[END] executeRequiresNewTransaction()");
+	}
+
 }
