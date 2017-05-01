@@ -113,6 +113,8 @@ Generally, when the one of these error event is thrown the transaction will not 
 Following a list of events triggered by calling a transactional method `f()`.
 
 ```Java
+// Example \#1
+
 @Transactional
 void f() { 
 
@@ -120,10 +122,14 @@ void f() {
 
 ```
 
+Example \#1 events:
+
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
 ```Java
+// Example \#2
+
 @Transactional
 void f() { 
 	// throws a checked exception
@@ -131,6 +137,8 @@ void f() {
 }
 
 ```
+
+Example \#2 events:
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
@@ -139,6 +147,8 @@ void f() {
 
 
 ```Java
+// Example \#3
+
 @Transactional
 void f() { 
 	// throws a unchecked exception
@@ -147,10 +157,14 @@ void f() {
 
 ```
 
+Example \#3 events:
+
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
 ```Java
+// Example \#4
+
 @Transactional(rollbackFor=CheckedException.class)
 void f() { 
 	// throws a checked exception
@@ -159,10 +173,14 @@ void f() {
 
 ```
 
+Example \#4 events:
+
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
 ```Java
+// Example \#5
+
 // Tx \#1
 @Transactional
 void f() { 
@@ -178,6 +196,9 @@ void g() {
 
 ```
 
+Example \#5 events:
+
+
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` (for Tx \#1)
 * `it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent` (for Tx \#1)
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` (for Tx \#2)
@@ -187,6 +208,8 @@ void g() {
 
 
 ```Java
+// Example \#6
+
 @Transactional
 void f() { 
 	g();
@@ -198,6 +221,9 @@ void g() {
 }
 
 ```
+
+Example \#6 events:
+
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` 
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
