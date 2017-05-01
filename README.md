@@ -110,29 +110,73 @@ Generally, when the one of these error event is thrown the transaction will not 
 
 # Transaction Life Cycle Examples
 
-When a transactional method is called successfully these events will be triggered:
+Following a list of events triggered by calling a transactional method `f()`.
+
+```Java
+@Transactional
+void f() { 
+
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
-When transactional method throws a checked exception:
+```Java
+@Transactional
+void f() { 
+	// throws a checked exception
+	throw new CheckedException();
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
-(notes that the transaction is committed event if the method has thrown an exception).
+(notes that the transaction is committed even if the method has thrown an exception)
 
-When a transactional method throws an unchecked exception:
+
+```Java
+@Transactional
+void f() { 
+	// throws a unchecked exception
+	throw new UncheckedException();
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
-When a transactional method throws a checked exception instance of the exception class set into the *rollbackFor* attribute of the Spring `@Transactional` annotation:
+```Java
+@Transactional(rollbackFor=CheckedException.class)
+void f() { 
+	// throws a checked exception
+	throw new CheckedException();
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
-When a transactional method calls another transactional method having *REQUIRES_NEW* as propagation attribute:
+```Java
+// Tx \#1
+@Transactional
+void f() { 
+	
+	g();
+}
+
+// Tx \#2
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+void g() {
+
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` (for Tx \#1)
 * `it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent` (for Tx \#1)
@@ -142,16 +186,41 @@ When a transactional method calls another transactional method having *REQUIRES_
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent` (for Tx \#1)
 
 
-When a transactional method calls another transactional method having *REQUIRED* as propagation attribute:
+```Java
+@Transactional
+void f() { 
+	g();
+}
+
+@Transactional(propagation = Propagation.REQUIRED)
+void g() {
+
+}
+
+```
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` 
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
-When a transactional method calls another transactional method having *REQUIRED* as propagation attribute and the second transactional method fails:
+```Java
+@Transactional
+void f() { 
+	try {
+		g();	
+	} catch (CheckedException e) {
+		// do nothing
+	}
+}
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent` (triggered by the call of the first transactional method)
-* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent` (triggered because the second transactional method fails for some reason)
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent` (triggered because the first method tries to commit a transaction marked as set to rollback only by the second transactional method called)
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor=CheckedException.class)
+void g() throws CheckedException {
+	throw new CheckedException();
+}
+
+
+* `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`: triggered by the calling f().
+* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent`: triggered because g() throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: triggered because f() tries to commit, but the transaction was set to be rollbacked by calling g().
 
 Note: all the previous scenario are represented in this JUnit test included in the source code:
 
