@@ -106,7 +106,7 @@ All the error events related to a transaction life cycle are subclass of
 
 `it.diepet.spring.tx.eventdispatcher.event.failure.TransactionErrorEvent<T>`
 
-The list of error events triggered is:
+The list of possible error events triggered is:
 
 * `it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent`
 
