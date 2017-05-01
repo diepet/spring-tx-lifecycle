@@ -2,6 +2,8 @@
 
 A Spring Framework plugin in order to dispatch ad-hoc Spring events during a transaction life cycle.
 
+Current last version: 0.9.0
+
 # Requisites
 
 * Java 1.6 or higher
