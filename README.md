@@ -48,7 +48,7 @@ Notes that all supported transaction manager classes are subclass of `org.spring
 # Transaction Events
 
 
-An event is triggered when one of these transaction manager method terminates without runtime errors:
+An event is triggered when one of these transaction manager method terminates **without** runtime errors:
 
 * `[Original Transaction Manager Class].doBegin(Object transaction, TransactionDefinition definition)`
 
@@ -84,29 +84,43 @@ The list of events triggered is:
 
 # Transaction Error Events
 
-An error event is triggered when one of the original transaction manager method call fails for a runtime exception. 
+An error event is triggered when one of the these transaction manager method call **fails** for a **runtime exception**:
 
-For example, when the transaction manager tries to commit a transaction set to rollback only the `[Original Transaction Manager Class].doCommit(DefaultTransactionStatus status)` method will throw a runtime exception.
+* `[Original Transaction Manager Class].doBegin(Object transaction, TransactionDefinition definition)`
 
-All the error events related to a transaction lifecycle are subclass of
+* `[Original Transaction Manager Class].doCommit(DefaultTransactionStatus status)`
+
+* `[Original Transaction Manager Class].doRollback(DefaultTransactionStatus status)`
+
+* `[Original Transaction Manager Class].doSuspend(Object transaction)`
+
+* `[Original Transaction Manager Class].doResume(Object transaction, Object suspendedResources)`
+
+* `[Original Transaction Manager Class].doSetRollbackOnly(DefaultTransactionStatus status)`
+
+where `[Original Transaction Manager Class]` is one of the Spring transaction manager supported listed above.
+
+For example, when the transaction manager tries to commit a transaction set to rollback only the `doCommit(...)` method will throw a runtime exception.
+
+All the error events related to a transaction life cycle are subclass of
 
 `it.diepet.spring.tx.eventdispatcher.event.failure.TransactionErrorEvent<T>`
 
 The list of error events triggered is:
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent`: when a `[Original Transaction Manager Class].doBegin(Object transaction, TransactionDefinition definition)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent`: when a `doBegin(...)` method call fails.
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: when a `[Original Transaction Manager Class].doCommit(DefaultTransactionStatus status)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: when a `doCommit(...)` method call fails.
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.RollbackTransactionErrorEvent`: when a `[Original Transaction Manager Class].doRollback(DefaultTransactionStatus status)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.RollbackTransactionErrorEvent`: when a `doRollback(...)` method call fails.
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SuspendTransactionErrorEvent`: when a `[Original Transaction Manager Class].doSuspend(Object transaction)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.SuspendTransactionErrorEvent`: when a `doSuspend(...)` method call fails.
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.ResumeTransactionErrorEvent`: when a `[Original Transaction Manager Class].doResume(Object transaction, Object suspendedResources)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.ResumeTransactionErrorEvent`: when a `doResume(...)` method call fails.
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent`: when a `[Original Transaction Manager Class].doSetRollbackOnly(DefaultTransactionStatus status)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent`: when a `doSetRollbackOnly(...)` method call fails.
 
-Generally, when one of these error events is triggered the transaction will not succeed.
+Generally, when one of these error events is triggered than the transaction will not succeed.
 
 # Transaction Life Cycle Examples
 
