@@ -113,7 +113,7 @@ Generally, when the one of these error event is thrown the transaction will not 
 Following a list of events triggered by calling a transactional method `f()`.
 
 ```Java
-// Example \#1
+// Example #1
 
 @Transactional
 void f() { 
@@ -128,7 +128,7 @@ Example \#1 events:
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
 ```Java
-// Example \#2
+// Example #2
 
 @Transactional
 void f() { 
@@ -138,7 +138,7 @@ void f() {
 
 ```
 
-Example \#2 events:
+Example #2 events:
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
@@ -147,7 +147,7 @@ Example \#2 events:
 
 
 ```Java
-// Example \#3
+// Example #3
 
 @Transactional
 void f() { 
@@ -157,13 +157,13 @@ void f() {
 
 ```
 
-Example \#3 events:
+Example #3 events:
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
 ```Java
-// Example \#4
+// Example #4
 
 @Transactional(rollbackFor=CheckedException.class)
 void f() { 
@@ -179,16 +179,16 @@ Example \#4 events:
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`
 
 ```Java
-// Example \#5
+// Example #5
 
-// Tx \#1
+// Tx #1
 @Transactional
 void f() { 
 	
 	g();
 }
 
-// Tx \#2
+// Tx #2
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 void g() {
 
@@ -208,7 +208,7 @@ Example \#5 events:
 
 
 ```Java
-// Example \#6
+// Example #6
 
 @Transactional
 void f() { 
@@ -229,6 +229,8 @@ Example \#6 events:
 * `it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent`
 
 ```Java
+// Example #7
+
 @Transactional
 void f() { 
 	try {
@@ -242,12 +244,13 @@ void f() {
 void g() throws CheckedException {
 	throw new CheckedException();
 }
+```
 
+Example \#7 events:
 
 * `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`: triggered by the calling f().
 * `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent`: triggered because g() throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
 * `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: triggered because f() tries to commit, but the transaction was set to be rollbacked by calling g().
 
-Note: all the previous scenario are represented in this JUnit test included in the source code:
 
-`it.diepet.spring.tx.eventdispatcher.test.app.AppTest`
+
