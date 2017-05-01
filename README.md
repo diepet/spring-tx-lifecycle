@@ -248,9 +248,9 @@ void g() throws CheckedException {
 
 Example \#7 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`: triggered by the calling f().
-* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent`: triggered because g() throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: triggered because f() tries to commit, but the transaction was set to be rollbacked by calling g().
+* `it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent`: triggered by the calling `f()`.
+* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent`: triggered because `g()` throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: triggered because `f()` tries to commit, but the transaction was set to be rollbacked by calling `g()`.
 
 
 
