@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>it.diepet.spring.tx</groupId>
-	<artifactId>spring-tx-event-publisher</artifactId>
+	<artifactId>spring-tx-eventdispatcher</artifactId>
 	<version>0.9.0</version>
 	<packaging>jar</packaging>
 
-	<name>spring-tx-event-publisher</name>
+	<name>spring-tx-eventdispatcher</name>
 	<url>https://github.com/diepet/spring-tx-eventdispatcher</url>
 
 	<properties>
