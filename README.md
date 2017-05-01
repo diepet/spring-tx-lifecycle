@@ -100,7 +100,7 @@ An error event is triggered when one of the these transaction manager method cal
 
 where `[Original Transaction Manager Class]` is one of the Spring transaction manager supported listed above.
 
-For example, when the transaction manager tries to commit a transaction set to rollback only the `doCommit(...)` method will throw a runtime exception.
+For example, when the transaction manager tries to commit a transaction set to rollback the `doCommit(...)` method will throw a runtime exception.
 
 All the error events related to a transaction life cycle are subclass of
 
@@ -108,17 +108,17 @@ All the error events related to a transaction life cycle are subclass of
 
 The list of error events triggered is:
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent`: when a `doBegin(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`: when a `doCommit(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.RollbackTransactionErrorEvent`: when a `doRollback(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.RollbackTransactionErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SuspendTransactionErrorEvent`: when a `doSuspend(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.SuspendTransactionErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.ResumeTransactionErrorEvent`: when a `doResume(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.ResumeTransactionErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent`: when a `doSetRollbackOnly(...)` method call fails.
+* `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent`
 
 Generally, when one of these error events is triggered than the transaction will not succeed.
 
