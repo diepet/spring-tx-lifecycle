@@ -76,15 +76,15 @@ The list of events triggered is:
 
 * `it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent`: when a transaction is roll backed.
 
-* `it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent`: when a transaction is suspended (for example because of a call of a method having the transaction propagation attribute set to *REQUIRES_NEW*).
+* `it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent`: when a transaction is suspended .
 
-* `it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent`: when a previous suspended transaction resumes (for example when a method having the transaction propagation attribute set to *REQUIRES_NEW* completes).
+* `it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent`: when a previous suspended transaction resumes.
 
 * `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent`: when a transaction is set to rollback.
 
 # Transaction Error Events
 
-An error event is triggered when one of the original transaction manager fails for a runtime exception. 
+An error event is triggered when one of the original transaction manager method call fails for a runtime exception. 
 
 For example, when the transaction manager tries to commit a transaction set to rollback only the `[Original Transaction Manager Class].doCommit(DefaultTransactionStatus status)` method will throw a runtime exception.
 
@@ -106,7 +106,7 @@ The list of error events triggered is:
 
 * `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent`: when a `[Original Transaction Manager Class].doSetRollbackOnly(DefaultTransactionStatus status)` method call fails.
 
-Generally, when the one of these error event is thrown the transaction will not succeed.
+Generally, when one of these error events is triggered the transaction will not succeed.
 
 # Transaction Life Cycle Examples
 
