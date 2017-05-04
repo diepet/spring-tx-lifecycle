@@ -18,8 +18,4 @@ public class ApplicationRuntimeException extends RuntimeException {
 		super(msg, t);
 	}
 
-	public ApplicationRuntimeException(String msg, Throwable t, boolean enableSuppression, boolean writableStackTrace) {
-		super(msg, t, enableSuppression, writableStackTrace);
-	}
-
 }

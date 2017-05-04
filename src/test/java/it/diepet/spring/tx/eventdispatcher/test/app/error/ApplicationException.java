@@ -18,8 +18,4 @@ public class ApplicationException extends Exception {
 		super(msg, t);
 	}
 
-	public ApplicationException(String msg, Throwable t, boolean enableSuppression, boolean writableStackTrace) {
-		super(msg, t, enableSuppression, writableStackTrace);
-	}
-
 }
