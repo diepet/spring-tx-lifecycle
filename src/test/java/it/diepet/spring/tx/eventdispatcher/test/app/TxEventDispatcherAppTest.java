@@ -18,7 +18,7 @@ import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/test-application-context.xml")
-public class AppTest {
+public class TxEventDispatcherAppTest {
 
 	@Autowired
 	private ProductService productService;
