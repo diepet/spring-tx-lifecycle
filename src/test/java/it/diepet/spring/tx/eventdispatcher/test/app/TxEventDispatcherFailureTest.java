@@ -1,4 +1,4 @@
-package it.diepet.spring.tx.eventdispatcher.test.failure;
+package it.diepet.spring.tx.eventdispatcher.test.app;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import it.diepet.spring.tx.eventdispatcher.model.RollbackTransactionInfo;
 import it.diepet.spring.tx.eventdispatcher.model.SetRollbackOnlyTransactionInfo;
 import it.diepet.spring.tx.eventdispatcher.model.SuspendTransactionInfo;
 
-public class FailureTest {
+public class TxEventDispatcherFailureTest {
 
 	@Test
 	public void testFailures() {
