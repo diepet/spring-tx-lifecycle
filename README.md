@@ -266,5 +266,6 @@ Example \#7 events:
 * `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyEvent`: triggered because `g()` throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
 * `it.diepet.spring.tx.eventdispatcher.event.failure.CommitErrorEvent`: triggered because `f()` tries to commit, but the transaction was set to be rollbacked by calling `g()`.
 
+# License
 
-
+This project is licensed under the terms of the MIT license.
