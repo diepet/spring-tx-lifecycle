@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event.failure;
 import it.diepet.spring.tx.eventdispatcher.model.SuspendTransactionInfo;
 
 /**
- * The Class SuspendTransactionErrorEvent.
+ * The Class SuspendErrorEvent.
  */
-public class SuspendTransactionErrorEvent extends TransactionErrorEvent<SuspendTransactionInfo> {
+public class SuspendErrorEvent extends TransactionLifecycleErrorEvent<SuspendTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2747252413803660635L;
@@ -18,7 +18,7 @@ public class SuspendTransactionErrorEvent extends TransactionErrorEvent<SuspendT
 	 * @param error
 	 *            the error
 	 */
-	public SuspendTransactionErrorEvent(SuspendTransactionInfo suspendTransactionInfo, RuntimeException error) {
+	public SuspendErrorEvent(SuspendTransactionInfo suspendTransactionInfo, RuntimeException error) {
 		super(suspendTransactionInfo, error);
 	}
 

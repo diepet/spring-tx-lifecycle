@@ -64,13 +64,13 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	
-	<bean id="testBeginTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestBeginTransactionEventListener" />
-	<bean id="testCommitTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitTransactionEventListener" />
-	<bean id="testResumeTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestResumeTransactionEventListener" />
-	<bean id="testRollbackTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestRollbackTransactionEventListener" />
-	<bean id="testSetRollbackOnlyTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyTransactionEventListener" />
-	<bean id="testSuspendTransactionEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendTransactionEventListener" />
+	<bean id="testBeginEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestBeginEventListener" />
+	<bean id="testCommitEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitEventListener" />
+	<bean id="testResumeEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestResumeEventListener" />
+	<bean id="testRollbackEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestRollbackEventListener" />
+	<bean id="testSetRollbackOnlyEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSetRollbackOnlyEventListener" />
+	<bean id="testSuspendEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestSuspendEventListener" />
 	
-	<bean id="testCommitTransactionErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitTransactionErrorEventListener" />
+	<bean id="testCommitErrorEventListener" class="it.diepet.spring.tx.eventdispatcher.test.app.listener.TestCommitErrorEventListener" />
 
 </beans>

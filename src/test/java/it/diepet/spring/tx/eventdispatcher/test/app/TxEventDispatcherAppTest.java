@@ -43,16 +43,12 @@ public class TxEventDispatcherAppTest {
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
 		Assert.assertEquals(6, stringList.size());
-		Assert.assertTrue(
-				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("productService.add()", stringList.get(1));
-		Assert.assertTrue(
-				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
-		Assert.assertTrue(
-				stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
+		Assert.assertTrue(stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("productService.findAll()", stringList.get(4));
-		Assert.assertTrue(
-				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
 	}
 
 	@Test
@@ -61,11 +57,9 @@ public class TxEventDispatcherAppTest {
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
 		Assert.assertEquals(3, stringList.size());
-		Assert.assertTrue(
-				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("productService.successfullOperation()", stringList.get(1));
-		Assert.assertTrue(
-				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
 	}
 
 	@Test
@@ -76,11 +70,9 @@ public class TxEventDispatcherAppTest {
 			List<String> stringList = StringCollector.getList();
 			Assert.assertNotNull(stringList);
 			Assert.assertEquals(3, stringList.size());
-			Assert.assertTrue(
-					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 			Assert.assertEquals("productService.launchCheckedException()", stringList.get(1));
-			Assert.assertTrue(
-					stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+			Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
 			return;
 		}
 		Assert.fail();
@@ -94,11 +86,9 @@ public class TxEventDispatcherAppTest {
 			List<String> stringList = StringCollector.getList();
 			Assert.assertNotNull(stringList);
 			Assert.assertEquals(3, stringList.size());
-			Assert.assertTrue(
-					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 			Assert.assertEquals("productService.launchUncheckedException()", stringList.get(1));
-			Assert.assertTrue(
-					stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent"));
+			Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.RollbackEvent"));
 			return;
 		}
 		Assert.fail();
@@ -112,11 +102,9 @@ public class TxEventDispatcherAppTest {
 			List<String> stringList = StringCollector.getList();
 			Assert.assertNotNull(stringList);
 			Assert.assertEquals(3, stringList.size());
-			Assert.assertTrue(
-					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 			Assert.assertEquals("productService.launchCheckedExceptionForRollback()", stringList.get(1));
-			Assert.assertTrue(
-					stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent"));
+			Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.RollbackEvent"));
 			return;
 		}
 		Assert.fail();
@@ -128,16 +116,12 @@ public class TxEventDispatcherAppTest {
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
 		Assert.assertEquals(6, stringList.size());
-		Assert.assertTrue(
-				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("productService.callSuspendingTransactionWarehouseMethod()", stringList.get(1));
-		Assert.assertTrue(
-				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent"));
+		Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendEvent"));
 		Assert.assertEquals("warehouseService.suspendCurrentTransaction()", stringList.get(3));
-		Assert.assertTrue(
-				stringList.get(4).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent"));
-		Assert.assertTrue(
-				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(stringList.get(4).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeEvent"));
+		Assert.assertTrue(stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
 	}
 
 	@Test
@@ -148,14 +132,13 @@ public class TxEventDispatcherAppTest {
 			List<String> stringList = StringCollector.getList();
 			Assert.assertNotNull(stringList);
 			Assert.assertEquals(5, stringList.size());
-			Assert.assertTrue(
-					stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+			Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 			Assert.assertEquals("productService.callFailingWarehouseMethod()", stringList.get(1));
 			Assert.assertEquals("warehouseService.launchCheckedExceptionForRollback()", stringList.get(2));
-			Assert.assertTrue(stringList.get(3)
-					.startsWith("it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent"));
-			Assert.assertTrue(stringList.get(4)
-					.startsWith("it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent"));
+			Assert.assertTrue(
+					stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyEvent"));
+			Assert.assertTrue(
+					stringList.get(4).startsWith("it.diepet.spring.tx.eventdispatcher.event.failure.CommitErrorEvent"));
 		}
 
 	}
@@ -166,19 +149,13 @@ public class TxEventDispatcherAppTest {
 		List<String> stringList = StringCollector.getList();
 		Assert.assertNotNull(stringList);
 		Assert.assertEquals(8, stringList.size());
-		Assert.assertTrue(
-				stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(0).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("productService.callRequiresNewWarehouseMethod()", stringList.get(1));
-		Assert.assertTrue(
-				stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent"));
-		Assert.assertTrue(
-				stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent"));
+		Assert.assertTrue(stringList.get(2).startsWith("it.diepet.spring.tx.eventdispatcher.event.SuspendEvent"));
+		Assert.assertTrue(stringList.get(3).startsWith("it.diepet.spring.tx.eventdispatcher.event.BeginEvent"));
 		Assert.assertEquals("warehouseService.executeRequiresNewTransaction()", stringList.get(4));
-		Assert.assertTrue(
-				stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
-		Assert.assertTrue(
-				stringList.get(6).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent"));
-		Assert.assertTrue(
-				stringList.get(7).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent"));
+		Assert.assertTrue(stringList.get(5).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
+		Assert.assertTrue(stringList.get(6).startsWith("it.diepet.spring.tx.eventdispatcher.event.ResumeEvent"));
+		Assert.assertTrue(stringList.get(7).startsWith("it.diepet.spring.tx.eventdispatcher.event.CommitEvent"));
 	}
 }

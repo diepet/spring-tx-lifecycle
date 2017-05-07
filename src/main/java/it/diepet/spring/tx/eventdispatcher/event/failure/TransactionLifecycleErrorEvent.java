@@ -5,12 +5,12 @@ import org.springframework.context.ApplicationEvent;
 import it.diepet.spring.tx.eventdispatcher.model.TransactionInfo;
 
 /**
- * The Class TransactionErrorEvent.
+ * The Class TransactionLifecycleErrorEvent.
  *
  * @param <T>
  *            the generic type
  */
-public class TransactionErrorEvent<T extends TransactionInfo> extends ApplicationEvent {
+public class TransactionLifecycleErrorEvent<T extends TransactionInfo> extends ApplicationEvent {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2518421182341826961L;
@@ -26,7 +26,7 @@ public class TransactionErrorEvent<T extends TransactionInfo> extends Applicatio
 	 * @param error
 	 *            the error
 	 */
-	public TransactionErrorEvent(T event, RuntimeException error) {
+	public TransactionLifecycleErrorEvent(T event, RuntimeException error) {
 		super(event);
 		this.error = error;
 	}

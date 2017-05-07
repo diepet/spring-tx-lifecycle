@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event.failure;
 import it.diepet.spring.tx.eventdispatcher.model.BeginTransactionInfo;
 
 /**
- * The Class BeginTransactionErrorEvent.
+ * The Class BeginErrorEvent.
  */
-public class BeginTransactionErrorEvent extends TransactionErrorEvent<BeginTransactionInfo> {
+public class BeginErrorEvent extends TransactionLifecycleErrorEvent<BeginTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2987892365067503025L;
@@ -18,7 +18,7 @@ public class BeginTransactionErrorEvent extends TransactionErrorEvent<BeginTrans
 	 * @param error
 	 *            the error
 	 */
-	public BeginTransactionErrorEvent(BeginTransactionInfo beginTransactionInfo, RuntimeException error) {
+	public BeginErrorEvent(BeginTransactionInfo beginTransactionInfo, RuntimeException error) {
 		super(beginTransactionInfo, error);
 	}
 

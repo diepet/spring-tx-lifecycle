@@ -8,18 +8,18 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
-import it.diepet.spring.tx.eventdispatcher.event.BeginTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.CommitTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.ResumeTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.RollbackTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.SuspendTransactionEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.BeginTransactionErrorEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.CommitTransactionErrorEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.ResumeTransactionErrorEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.RollbackTransactionErrorEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyTransactionErrorEvent;
-import it.diepet.spring.tx.eventdispatcher.event.failure.SuspendTransactionErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.BeginEvent;
+import it.diepet.spring.tx.eventdispatcher.event.CommitEvent;
+import it.diepet.spring.tx.eventdispatcher.event.ResumeEvent;
+import it.diepet.spring.tx.eventdispatcher.event.RollbackEvent;
+import it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyEvent;
+import it.diepet.spring.tx.eventdispatcher.event.SuspendEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.BeginErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.CommitErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.ResumeErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.RollbackErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.SuspendErrorEvent;
 import it.diepet.spring.tx.eventdispatcher.model.BeginTransactionInfo;
 import it.diepet.spring.tx.eventdispatcher.model.CommitTransactionInfo;
 import it.diepet.spring.tx.eventdispatcher.model.ResumeTransactionInfo;
@@ -56,10 +56,10 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 		try {
 			super.doResume(transaction, suspendedResources);
 			// publish begin transaction event
-			this.applicationEventPublisher.publishEvent(new ResumeTransactionEvent(resumeTransactionInfo));
+			this.applicationEventPublisher.publishEvent(new ResumeEvent(resumeTransactionInfo));
 		} catch (RuntimeException error) {
 			// publish begin transaction error event
-			this.applicationEventPublisher.publishEvent(new ResumeTransactionErrorEvent(resumeTransactionInfo, error));
+			this.applicationEventPublisher.publishEvent(new ResumeErrorEvent(resumeTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doResume()");
@@ -82,11 +82,11 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 			super.doSetRollbackOnly(status);
 			// publish set rollback only transaction event
 			this.applicationEventPublisher
-					.publishEvent(new SetRollbackOnlyTransactionEvent(setRollbackOnlyTransactionInfo));
+					.publishEvent(new SetRollbackOnlyEvent(setRollbackOnlyTransactionInfo));
 		} catch (RuntimeException error) {
 			// publish set rollback only transaction error event
 			this.applicationEventPublisher
-					.publishEvent(new SetRollbackOnlyTransactionErrorEvent(setRollbackOnlyTransactionInfo, error));
+					.publishEvent(new SetRollbackOnlyErrorEvent(setRollbackOnlyTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doSetRollbackOnly()");
@@ -107,12 +107,12 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 		try {
 			Object result = super.doSuspend(transaction);
 			// publish suspend transaction event
-			this.applicationEventPublisher.publishEvent(new SuspendTransactionEvent(suspendTransactionInfo));
+			this.applicationEventPublisher.publishEvent(new SuspendEvent(suspendTransactionInfo));
 			return result;
 		} catch (RuntimeException error) {
 			// publish suspend transaction error event
 			this.applicationEventPublisher
-					.publishEvent(new SuspendTransactionErrorEvent(suspendTransactionInfo, error));
+					.publishEvent(new SuspendErrorEvent(suspendTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doSuspend()");
@@ -132,10 +132,10 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 		try {
 			super.doBegin(transaction, definition);
 			// publish begin transaction event
-			this.applicationEventPublisher.publishEvent(new BeginTransactionEvent(beginTransactionInfo));
+			this.applicationEventPublisher.publishEvent(new BeginEvent(beginTransactionInfo));
 		} catch (RuntimeException error) {
 			// publish begin transaction error event
-			this.applicationEventPublisher.publishEvent(new BeginTransactionErrorEvent(beginTransactionInfo, error));
+			this.applicationEventPublisher.publishEvent(new BeginErrorEvent(beginTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doBegin()");
@@ -155,10 +155,10 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 		try {
 			super.doCommit(status);
 			// publish commit transaction event
-			this.applicationEventPublisher.publishEvent(new CommitTransactionEvent(commitTransactionInfo));
+			this.applicationEventPublisher.publishEvent(new CommitEvent(commitTransactionInfo));
 		} catch (RuntimeException error) {
 			// publish commit transaction error event
-			this.applicationEventPublisher.publishEvent(new CommitTransactionErrorEvent(commitTransactionInfo, error));
+			this.applicationEventPublisher.publishEvent(new CommitErrorEvent(commitTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doCommit()");
@@ -178,11 +178,11 @@ public class EventDispatcherHibernate4TransactionManager extends HibernateTransa
 		try {
 			super.doRollback(status);
 			// publish rollback transaction event
-			this.applicationEventPublisher.publishEvent(new RollbackTransactionEvent(rollbackTransactionInfo));
+			this.applicationEventPublisher.publishEvent(new RollbackEvent(rollbackTransactionInfo));
 		} catch (RuntimeException error) {
 			// publish rollback transaction event
 			this.applicationEventPublisher
-					.publishEvent(new RollbackTransactionErrorEvent(rollbackTransactionInfo, error));
+					.publishEvent(new RollbackErrorEvent(rollbackTransactionInfo, error));
 			throw error;
 		} finally {
 			LOGGER.debug("[END] doRollback()");

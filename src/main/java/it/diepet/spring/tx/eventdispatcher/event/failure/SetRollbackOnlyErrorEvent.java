@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event.failure;
 import it.diepet.spring.tx.eventdispatcher.model.SetRollbackOnlyTransactionInfo;
 
 /**
- * The Class SetRollbackOnlyTransactionErrorEvent.
+ * The Class SetRollbackOnlyErrorEvent.
  */
-public class SetRollbackOnlyTransactionErrorEvent extends TransactionErrorEvent<SetRollbackOnlyTransactionInfo> {
+public class SetRollbackOnlyErrorEvent extends TransactionLifecycleErrorEvent<SetRollbackOnlyTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -9214810245384000054L;
@@ -18,7 +18,7 @@ public class SetRollbackOnlyTransactionErrorEvent extends TransactionErrorEvent<
 	 * @param error
 	 *            the error
 	 */
-	public SetRollbackOnlyTransactionErrorEvent(SetRollbackOnlyTransactionInfo setRollbackOnlyTransactionInfo,
+	public SetRollbackOnlyErrorEvent(SetRollbackOnlyTransactionInfo setRollbackOnlyTransactionInfo,
 			RuntimeException error) {
 		super(setRollbackOnlyTransactionInfo, error);
 	}

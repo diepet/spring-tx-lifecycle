@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event.failure;
 import it.diepet.spring.tx.eventdispatcher.model.CommitTransactionInfo;
 
 /**
- * The Class CommitTransactionErrorEvent.
+ * The Class CommitErrorEvent.
  */
-public class CommitTransactionErrorEvent extends TransactionErrorEvent<CommitTransactionInfo> {
+public class CommitErrorEvent extends TransactionLifecycleErrorEvent<CommitTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2291424699348070283L;
@@ -18,7 +18,7 @@ public class CommitTransactionErrorEvent extends TransactionErrorEvent<CommitTra
 	 * @param error
 	 *            the error
 	 */
-	public CommitTransactionErrorEvent(CommitTransactionInfo commitTransactionInfo, RuntimeException error) {
+	public CommitErrorEvent(CommitTransactionInfo commitTransactionInfo, RuntimeException error) {
 		super(commitTransactionInfo, error);
 	}
 

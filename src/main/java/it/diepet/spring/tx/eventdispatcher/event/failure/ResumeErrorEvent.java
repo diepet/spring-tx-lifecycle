@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event.failure;
 import it.diepet.spring.tx.eventdispatcher.model.ResumeTransactionInfo;
 
 /**
- * The Class ResumeTransactionErrorEvent.
+ * The Class ResumeErrorEvent.
  */
-public class ResumeTransactionErrorEvent extends TransactionErrorEvent<ResumeTransactionInfo> {
+public class ResumeErrorEvent extends TransactionLifecycleErrorEvent<ResumeTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6548406599071911274L;
@@ -18,7 +18,7 @@ public class ResumeTransactionErrorEvent extends TransactionErrorEvent<ResumeTra
 	 * @param error
 	 *            the error
 	 */
-	public ResumeTransactionErrorEvent(ResumeTransactionInfo resumeTransactionInfo, RuntimeException error) {
+	public ResumeErrorEvent(ResumeTransactionInfo resumeTransactionInfo, RuntimeException error) {
 		super(resumeTransactionInfo, error);
 	}
 

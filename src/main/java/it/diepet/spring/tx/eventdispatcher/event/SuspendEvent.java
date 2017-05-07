@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event;
 import it.diepet.spring.tx.eventdispatcher.model.SuspendTransactionInfo;
 
 /**
- * The Class SuspendTransactionEvent.
+ * The Class SuspendEvent.
  */
-public class SuspendTransactionEvent extends TransactionEvent<SuspendTransactionInfo> {
+public class SuspendEvent extends TransactionLifecycleEvent<SuspendTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4177514771533256504L;
@@ -13,9 +13,10 @@ public class SuspendTransactionEvent extends TransactionEvent<SuspendTransaction
 	/**
 	 * Instantiates a new suspend transaction event.
 	 *
-	 * @param suspendTransactionInfo the suspend transaction info
+	 * @param suspendTransactionInfo
+	 *            the suspend transaction info
 	 */
-	public SuspendTransactionEvent(SuspendTransactionInfo suspendTransactionInfo) {
+	public SuspendEvent(SuspendTransactionInfo suspendTransactionInfo) {
 		super(suspendTransactionInfo);
 	}
 

@@ -3,9 +3,9 @@ package it.diepet.spring.tx.eventdispatcher.event;
 import it.diepet.spring.tx.eventdispatcher.model.BeginTransactionInfo;
 
 /**
- * The Class TransactionBeginEvent.
+ * The Class BeginEvent.
  */
-public class BeginTransactionEvent extends TransactionEvent<BeginTransactionInfo> {
+public class BeginEvent extends TransactionLifecycleEvent<BeginTransactionInfo> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2265263773330032633L;
@@ -13,10 +13,11 @@ public class BeginTransactionEvent extends TransactionEvent<BeginTransactionInfo
 	/**
 	 * Instantiates a new begin transaction event.
 	 *
-	 * @param beginTransactionInfo the begin transaction info
+	 * @param beginTransactionInfo
+	 *            the begin transaction info
 	 */
-	public BeginTransactionEvent(BeginTransactionInfo beginTransactionInfo) {
+	public BeginEvent(BeginTransactionInfo beginTransactionInfo) {
 		super(beginTransactionInfo);
 	}
-	
+
 }

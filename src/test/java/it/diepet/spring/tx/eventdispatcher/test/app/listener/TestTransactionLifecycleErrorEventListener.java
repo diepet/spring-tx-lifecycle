@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 
-import it.diepet.spring.tx.eventdispatcher.event.failure.TransactionErrorEvent;
+import it.diepet.spring.tx.eventdispatcher.event.failure.TransactionLifecycleErrorEvent;
 import it.diepet.spring.tx.eventdispatcher.test.util.StringCollector;
 
-public abstract class TestTransactionErrorEventListener<T extends TransactionErrorEvent<?>>
+public abstract class TestTransactionLifecycleErrorEventListener<T extends TransactionLifecycleErrorEvent<?>>
 		implements ApplicationListener<T> {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
