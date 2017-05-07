@@ -1,4 +1,4 @@
-# spring-tx-eventdispatcher 
+# spring-tx-eventdispatcher [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Spring Framework plugin in order to dispatch ad-hoc Spring events during a transaction life cycle.
 
