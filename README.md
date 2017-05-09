@@ -1,6 +1,6 @@
-# spring-tx-eventdispatcher [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# spring-tx-lifecycle [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A Spring Framework plugin in order to dispatch ad-hoc Spring events during a transaction life cycle.
+A Spring Framework plugin in order to dispatch ad-hoc Spring events during a transaction lifecycle.
 
 Current last version: 0.9.0
 
@@ -38,7 +38,7 @@ must be replaced by
 
 ```xml
 	<!-- TX Configuration -->		
-	<bean id="transactionManager" class="it.diepet.spring.tx.eventdispatcher.EventDispatcherJpaTransactionManager">
+	<bean id="transactionManager" class="it.diepet.spring.tx.lifecycle.EventDispatcherJpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 ```
@@ -64,23 +64,23 @@ An event is triggered when one of these transaction manager method terminates **
 
 where `[Original Transaction Manager Class]` is one of the Spring transaction manager supported listed above.
 
-All the events triggered for tracking a transaction life cycle are subclass of
+All the events triggered for tracking a transaction lifecycle are subclass of
 
-`it.diepet.spring.tx.eventdispatcher.event.TransactionLifecycleEvent<T>`
+`it.diepet.spring.tx.lifecycle.event.TransactionLifecycleEvent<T>`
 
 The list of events triggered is:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`: when a new transaction begins.
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`: when a new transaction begins.
 
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent`: when a transaction commits successfully.
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent`: when a transaction commits successfully.
 
-* `it.diepet.spring.tx.eventdispatcher.event.RollbackEvent`: when a transaction is roll backed.
+* `it.diepet.spring.tx.lifecycle.event.RollbackEvent`: when a transaction is roll backed.
 
-* `it.diepet.spring.tx.eventdispatcher.event.SuspendEvent`: when a transaction is suspended .
+* `it.diepet.spring.tx.lifecycle.event.SuspendEvent`: when a transaction is suspended .
 
-* `it.diepet.spring.tx.eventdispatcher.event.ResumeEvent`: when a previous suspended transaction resumes.
+* `it.diepet.spring.tx.lifecycle.event.ResumeEvent`: when a previous suspended transaction resumes.
 
-* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyEvent`: when a transaction is set to rollback.
+* `it.diepet.spring.tx.lifecycle.event.SetRollbackOnlyEvent`: when a transaction is set to rollback.
 
 # Transaction Error Events
 
@@ -102,27 +102,27 @@ where `[Original Transaction Manager Class]` is one of the Spring transaction ma
 
 For example, when the transaction manager tries to commit a transaction set to rollback the `doCommit(...)` method will throw a runtime exception.
 
-All the error events related to a transaction life cycle are subclass of
+All the error events related to a transaction lifecycle are subclass of
 
-`it.diepet.spring.tx.eventdispatcher.event.failure.TransactionLifecycleErrorEvent<T>`
+`it.diepet.spring.tx.lifecycle.event.failure.TransactionLifecycleErrorEvent<T>`
 
 The list of possible error events triggered is:
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.BeginErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.BeginErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.CommitErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.RollbackErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.RollbackErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SuspendErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.SuspendErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.ResumeErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.ResumeErrorEvent`
 
-* `it.diepet.spring.tx.eventdispatcher.event.failure.SetRollbackOnlyErrorEvent`
+* `it.diepet.spring.tx.lifecycle.event.failure.SetRollbackOnlyErrorEvent`
 
 Generally, when one of these error events is triggered than the transaction will not succeed.
 
-# Transaction Life Cycle Examples
+# Transaction Lifecycle Examples
 
 Following a list of events triggered by calling a transactional method `f()`.
 
@@ -138,8 +138,8 @@ void f() {
 
 Example \#1 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent`
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent`
 
 ```Java
 // Example #2
@@ -154,8 +154,8 @@ void f() {
 
 Example #2 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent`
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent`
 
 (notes that the transaction is committed even if the method has thrown an exception)
 
@@ -173,8 +173,8 @@ void f() {
 
 Example #3 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`
-* `it.diepet.spring.tx.eventdispatcher.event.RollbackEvent`
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`
+* `it.diepet.spring.tx.lifecycle.event.RollbackEvent`
 
 ```Java
 // Example #4
@@ -189,8 +189,8 @@ void f() {
 
 Example \#4 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`
-* `it.diepet.spring.tx.eventdispatcher.event.RollbackEvent`
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`
+* `it.diepet.spring.tx.lifecycle.event.RollbackEvent`
 
 ```Java
 // Example #5
@@ -213,12 +213,12 @@ void g() {
 Example \#5 events:
 
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent` (for Tx \#1)
-* `it.diepet.spring.tx.eventdispatcher.event.SuspendEvent` (for Tx \#1)
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent` (for Tx \#2)
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent` (for Tx \#2)
-* `it.diepet.spring.tx.eventdispatcher.event.ResumeEvent` (for Tx \#1)
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent` (for Tx \#1)
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent` (for Tx \#1)
+* `it.diepet.spring.tx.lifecycle.event.SuspendEvent` (for Tx \#1)
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent` (for Tx \#2)
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent` (for Tx \#2)
+* `it.diepet.spring.tx.lifecycle.event.ResumeEvent` (for Tx \#1)
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent` (for Tx \#1)
 
 
 ```Java
@@ -239,8 +239,8 @@ void g() {
 Example \#6 events:
 
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent` 
-* `it.diepet.spring.tx.eventdispatcher.event.CommitEvent`
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent` 
+* `it.diepet.spring.tx.lifecycle.event.CommitEvent`
 
 ```Java
 // Example #7
@@ -262,9 +262,9 @@ void g() throws CheckedException {
 
 Example \#7 events:
 
-* `it.diepet.spring.tx.eventdispatcher.event.BeginEvent`: triggered by the calling `f()`.
-* `it.diepet.spring.tx.eventdispatcher.event.SetRollbackOnlyEvent`: triggered because `g()` throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
-* `it.diepet.spring.tx.eventdispatcher.event.failure.CommitErrorEvent`: triggered because `f()` tries to commit, but the transaction was set to be rollbacked by calling `g()`.
+* `it.diepet.spring.tx.lifecycle.event.BeginEvent`: triggered by the calling `f()`.
+* `it.diepet.spring.tx.lifecycle.event.SetRollbackOnlyEvent`: triggered because `g()` throws a checked exception instance of the exception class set into the *rollbackFor* attribute.
+* `it.diepet.spring.tx.lifecycle.event.failure.CommitErrorEvent`: triggered because `f()` tries to commit, but the transaction was set to be rollbacked by calling `g()`.
 
 # License
 
